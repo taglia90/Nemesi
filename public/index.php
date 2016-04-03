@@ -1,12 +1,10 @@
-
 <?php
 // load up your config file
 // require_once("/path/to/resources/config.php");
 // require_once(TEMPLATES_PATH . "/header.php");
-require_once ("/header.php");
-require_once ("/leftPanel.php");
+require_once ("header.php");
+require_once ("leftPanel.php");
 ?>
-
 
 <!-- /. NAV SIDE  -->
 <div id="page-wrapper">
@@ -24,7 +22,11 @@ require_once ("/leftPanel.php");
 	</div>
 	<!-- /. PAGE INNER  -->
 </div>
+<!-- /. PAGE WRAPPER  -->
+<?php require_once("footer.php");?>
+<script>
+	setActiveMenu("home");
+</script>
 
-<?php require_once("/footer.php");?>
-		
-		
+</body>
+</html>		

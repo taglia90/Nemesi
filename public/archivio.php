@@ -1,8 +1,10 @@
 ﻿<?php
+require_once ("header.php");
 //VARIABILI DB
 $servername = "localhost";
-$username = "Nemesi";
-$password = "Nemesi";
+$username = "root";
+$password = "password";
+$dbName ="Nemesi";
 
 //VARIABILI DELLA PAGINA
 $nameErr = $bancaErr = "";
@@ -32,8 +34,9 @@ if(isset($_POST['inserisci']))
 	}
 	//Effettuo l'inserimento se tutti i dati obbligatori sono stati compilati
 	if($inserisci){
-
-		$conn = new mysqli($servername, $username, $password);
+		
+		$conn = new mysqli($servername, $username, $password, $dbName);
+		
 		if ($conn->connect_error) {
 			die("Errore di connessione: " . $conn->connect_error);
 		} 
@@ -43,7 +46,7 @@ if(isset($_POST['inserisci']))
 		
 		if($banca!=0){	
 			//Caso in cui la banca esiste
-			$sql = "INSERT INTO Nemesi.t_archivio (nome_cliente, banca, descrizione)
+			$sql = "INSERT INTO t_archivio (nome_cliente, banca, descrizione)
 			VALUES ('".$name."','".$banca."','".$descrizione."')";
 			
 			if ($conn->query($sql) === TRUE) {
@@ -56,7 +59,7 @@ if(isset($_POST['inserisci']))
 			
 		}else{
 			//caso nuova banca: inserisco la nuova banca e l'archivio
-			$sql = "INSERT INTO Nemesi.l_banca (nome)
+			$sql = "INSERT INTO l_banca (nome)
 			VALUES ('".$nuovaBanca."')";
 			
 			if ($conn->query($sql) === TRUE) {
@@ -66,13 +69,13 @@ if(isset($_POST['inserisci']))
 			}
 			$conn->close();
 			
-			$conn = new mysqli($servername, $username, $password);
+			$conn = new mysqli($servername, $username, $password, $dbName);
 			if ($conn->connect_error) {
 				die("Errore di connessione: " . $conn->connect_error);
 			} 
-			$sql2 = "INSERT INTO Nemesi.t_archivio (nome_cliente, banca, descrizione)
+			$sql2 = "INSERT INTO t_archivio (nome_cliente, banca, descrizione)
 			SELECT '".$name."',id_banca,'".$descrizione."'
-			FROM Nemesi.l_banca
+			FROM l_banca
 			where nome = '".$nuovaBanca."'";
 			
 			if ($conn->query($sql2) === TRUE) {
@@ -90,16 +93,16 @@ if(isset($_POST['inserisci']))
 function draw_table(){
 
 	//recupero i dati dell'archivio
-	global $servername, $username, $password;
-	$conn = new mysqli($servername, $username, $password);
+	global $servername, $username, $password, $dbName;
+	$conn = mysqli($servername, $username, $password, $dbName);
 
 	if ($conn->connect_error) {
 		die("Errore di connessione: " . $conn->connect_error);
 	} 
 
 	$sql = "SELECT a.id_archivio, a.nome_cliente, b.nome, a.descrizione
-			FROM Nemesi.t_archivio a
-			LEFT JOIN Nemesi.l_banca b 
+			FROM t_archivio a
+			LEFT JOIN l_banca b 
 			ON a.banca = b.id_banca 
 			order by 1";
 	$result = $conn->query($sql);
@@ -147,14 +150,14 @@ function draw_table(){
 
 function create_dropdown(){
 	//recupero i dati dell'archivio
-	global $servername, $username, $password;
-	$conn = new mysqli($servername, $username, $password);
+	global $servername, $username, $password, $dbName;
+	$conn = new mysqli($servername, $username, $password, $dbName);
 
 	if ($conn->connect_error) {
 		die("Errore di connessione: " . $conn->connect_error);
 	} 
 	
-	$sql = "SELECT id_banca, nome FROM Nemesi.l_banca";
+	$sql = "SELECT id_banca, nome FROM l_banca";
 	$result = $conn->query($sql);
 
 	//Genero la stringa html
@@ -178,14 +181,14 @@ function delete_row(){
 	
 
 	//recupero i dati dell'archivio
-	global $servername, $username, $password;
-	$conn = new mysqli($servername, $username, $password);
+	global $servername, $username, $password, $dbName;
+	$conn = new mysqli($servername, $username, $password, $dbName);
 
 	if ($conn->connect_error) {
 		die("Errore di connessione: " . $conn->connect_error);
 	} 
 	
-	$sql = "SELECT id_banca, nome FROM Nemesi.l_banca";
+	$sql = "SELECT id_banca, nome FROM l_banca";
 	$result = $conn->query($sql);
 
 	//Genero la stringa html
@@ -203,10 +206,7 @@ function delete_row(){
 	return $str_select;
 }
 
-
-
-require_once ("/header.php");
-require_once ("/leftPanel.php");
+require_once ("leftPanel.php");
 ?>
 
 
@@ -291,19 +291,10 @@ require_once ("/leftPanel.php");
         <!-- /. PAGE WRAPPER  -->
     </div>
     <!-- /. WRAPPER  -->
-    <!--<div id="footer-sec">
-        &copy; 2014 YourCompany | Design By : <a href="http://www.binarytheme.com/" target="_blank">BinaryTheme.com</a>
-    </div>-->
-    <!-- /. FOOTER  -->
-    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
-    <!-- JQUERY SCRIPTS -->
-    <script src="js/jquery-1.10.2.js"></script>
-    <!-- BOOTSTRAP SCRIPTS -->
-    <script src="js/bootstrap.js"></script>
-    <!-- METISMENU SCRIPTS -->
-    <script src="js/jquery.metisMenu.js"></script>
-    <!-- CUSTOM SCRIPTS -->
-    <script src="js/custom.js"></script>
+<?php require_once("footer.php");?>
+<script>
+	setActiveMenu("archivio");
+</script>
 	
 	<!-- CUSTOM SCRIPT PER QUESTA PAGINA -->	
 	<script>
