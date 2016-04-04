@@ -10,8 +10,6 @@ $dbName ="Nemesi";
 $nameErr = $bancaErr = "";
 $queryResult = "";
 
-//echo "<script>alert('".$config["db"]["db1"]["dbname"]."');</script>";
-
 //INSERIMENTO IN ARCHIVIO
 if(isset($_POST['inserisci']))
 { 
@@ -179,30 +177,6 @@ function create_dropdown(){
 
 function delete_row(){
 
-	//recupero i dati dell'archivio
-	global $config;
-	$conn = new mysqli($config["db"]["db1"]["host"], $config["db"]["db1"]["username"], $config["db"]["db1"]["password"], $config["db"]["db1"]["dbname"]);
-
-	if ($conn->connect_error) {
-		die("Errore di connessione: " . $conn->connect_error);
-	} 
-	
-	$sql = "SELECT id_banca, nome FROM l_banca";
-	$result = $conn->query($sql);
-
-	//Genero la stringa html
-	$str_select ="<select id='banca' name='banca' class=form-control>
-				  <option value=0/>";
-	
-	//Trasformo i risultati della query in associativi
-	while ($row = $result->fetch_assoc()) {
-	$str_select.="<option value='".$row["id_banca"]."'>".$row["nome"]."</option>";
-	}
-	$str_select.= "</select>";
-	
-	$conn->close();
-	
-	return $str_select;
 }
 
 require_once ("leftPanel.php");
