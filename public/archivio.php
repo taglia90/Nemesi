@@ -1,10 +1,5 @@
 ﻿<?php
 require_once ("header.php");
-//VARIABILI DB
-$servername = "localhost";
-$username = "root";
-$password = "password";
-$dbName ="Nemesi";
 
 //VARIABILI DELLA PAGINA
 $nameErr = $bancaErr = "";
@@ -108,7 +103,7 @@ function draw_table(){
 	$result = $conn->query($sql);
 
 	//Genero la stringa html
-	$str_table ="<table class='table table-hover'>
+	$str_table ="<table class='table table-hover' id='archivioTable'>
 				<thead>
 					<tr>
 						<th width='5%'>ID</th>
@@ -135,9 +130,10 @@ function draw_table(){
 						<td><button class='btn btn-primary'>
 							<i class='fa fa-wrench'></i>
 						  </button></td>
-						<td><button class='btn btn-primary'>
-							<i class='fa fa-trash'></i>
-						  </button></td>
+						<td><form method='post' action='archivio.php'>
+							<button type='submit' name='deleteRow'
+							class='btn btn-primary' value='".$row["id_archivio"]."'><i class='fa fa-trash'></i>
+						  </button></form></td>
 					  </tr>";
 	}
 	$str_table.= "</tbody></table>";
@@ -175,8 +171,26 @@ function create_dropdown(){
 	return $str_select;
 }
 
-function delete_row(){
+if(isset($_POST['deleteRow']))
+{ 	
+	
+	$conn = new mysqli($config["db"]["db1"]["host"], $config["db"]["db1"]["username"], $config["db"]["db1"]["password"], $config["db"]["db1"]["dbname"]);
+	if ($conn->connect_error) {
+		die("Errore di connessione: " . $conn->connect_error);
+	} 
+	
+	$sql = "DELETE FROM t_archivio
+			WHERE id_archivio =".$_POST['deleteRow']." ";
+			
+	if ($conn->query($sql) === TRUE) {
+		echo "<script>alert('Eliminazione effettuata correttamente');</script>";
+	} else {
+		echo "<script>alert('Errore eliminazione: ".$conn->connect_error."');</script>";
+	}
 
+	$conn->close();
+	
+	
 }
 
 require_once ("leftPanel.php");
@@ -265,27 +279,29 @@ require_once ("leftPanel.php");
     </div>
     <!-- /. WRAPPER  -->
 <?php require_once("footer.php");?>
+<!-- CUSTOM SCRIPT PER QUESTA PAGINA -->	
 <script>
-	setActiveMenu("archivio");
+setActiveMenu("archivio");
+
+$(document).ready(function(){
+    $('#archivioTable').DataTable();
+});
+
+
+//abilito campo nuova banca
+function showNuovaBanca(){
+	$('#nuovaBancaDiv').show();
+	$('#banca').val(0);
+	$('#banca').prop('disabled', 'disabled');
+}
+//nascondo campo nuova banca
+function hideNuovaBanca(){
+	$('#nuovaBanca').val('');
+	$('#nuovaBancaDiv').hide();
+	$('#banca').prop('disabled', false);
+} 
+
 </script>
-	
-	<!-- CUSTOM SCRIPT PER QUESTA PAGINA -->	
-	<script>
-	
-	//abilito campo nuova banca
-	function showNuovaBanca(){
-		$('#nuovaBancaDiv').show();
-		$('#banca').val(0);
-		$('#banca').prop('disabled', 'disabled');
-	}
-	//nascondo campo nuova banca
-	function hideNuovaBanca(){
-		$('#nuovaBanca').val('');
-		$('#nuovaBancaDiv').hide();
-		$('#banca').prop('disabled', false);
-	} 
-	 
-	</script>
 
 </body>
 </html>

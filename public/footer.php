@@ -15,4 +15,6 @@
 <script src="js/jquery.metisMenu.js"></script>
 <!-- CUSTOM SCRIPTS -->
 <script src="js/custom.js"></script>
+<!-- DATA TABLE SCRIPTS -->
+<script type="text/javascript" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
 

@@ -22,6 +22,9 @@
 <!-- GOOGLE FONTS-->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans'
 	rel='stylesheet' type='text/css' />
+<!-- DATA TABLES-->
+<link href='//cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css'
+	rel='stylesheet' type='text/css' />
 </head>
 <body>
 	<div id="wrapper">
