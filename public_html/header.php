@@ -1,7 +1,7 @@
 <?php 
 //load up your config file
  require_once("../config.php");
-
+ include_once 'common.php';
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +37,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.html">COMPANY NAME</a>
+				<a class="navbar-brand" href="index.html">NEMESI</a>
 			</div>
 
 			<!-- 

@@ -12,8 +12,7 @@ require_once ("leftPanel.php");
 		<div class="row">
 			<div class="col-md-12">
 				<h1 class="page-head-line">HOMEPAGE</h1>
-				<h1 class="page-subhead-line">TODO: inserire qualcosa in questa
-					homepage</h1>
+				<h1 class="page-subhead-line"><?php echo $lang['HOME_PROVA']; ?></h1>
 
 			</div>
 		</div>

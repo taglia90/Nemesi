@@ -202,7 +202,7 @@ require_once ("leftPanel.php");
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1 class="page-head-line">Archivio</h1>
+                        <h1 class="page-head-line"><?php echo $lang['ARCHIVIO_HEADLINE']; ?></h1>
                     </div>
                 </div>
                 <!-- /. ROW  -->
@@ -210,17 +210,17 @@ require_once ("leftPanel.php");
             <div class="col-md-12 col-sm-12 col-xs-12">
                <div class="panel panel-default">
                         <div class="panel-heading">
-                           INSERIMENTO ARCHIVIO
+                           <?php echo $lang['ARCHIVIO_INSERIMENTO']; ?>
                         </div>
                         <div class="panel-body">
                             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 								<div class="form-group">
-									<label>Nome Cliente</label>
+									<label><?php echo $lang['ARCHIVIO_NOME_CLIENTE']; ?></label>
 									<input class="form-control" type="text" name="nome_cliente">
 									<p class="help-block" style="color:red;"><?php echo $nameErr;?></p>
 								</div>
 								<div>
-									<label>Banca</label>
+									<label><?php echo $lang['ARCHIVIO_BANCA']; ?></label>
 								</div>
                                  <div class="input-group">									
 									<?php echo create_dropdown(); ?> 
@@ -235,7 +235,7 @@ require_once ("leftPanel.php");
 								</div>
 								<div id="nuovaBancaDiv" style="display: none;">
 									<div>
-										<label>Nuova Banca</label>
+										<label><?php echo $lang['ARCHIVIO_NUOVA_BANCA']; ?></label>
 									</div>
 									<div class="input-group">
 										<input class="form-control" type="text" name="nuovaBanca" id="nuovaBanca">
@@ -247,11 +247,11 @@ require_once ("leftPanel.php");
 									</div>
 								</div>
 								<div class="form-group">
-                                            <label>Descrizione</label>
+                                            <label><?php echo $lang['ARCHIVIO_DESCRIZIONE']; ?></label>
                                             <input class="form-control" type="text" name="descrizione">
  							    </div>
                                  <div> &nbsp </div>
-                                        <button type="submit" name="inserisci" class="btn btn-primary">Inserisci </button>
+                                        <button type="submit" name="inserisci" class="btn btn-primary"><?php echo $lang['ARCHIVIO_INSERISCI']; ?></button>
 										 <p class="help-block" float=right; style="color:green;"><?php echo $queryResult;?></p>
                                     </form>
                             </div>
@@ -264,7 +264,7 @@ require_once ("leftPanel.php");
             <!--    Hover Rows  -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            LISTA ARCHIVIO
+                            <?php echo $lang['ARCHIVIO_LISTA_ARCHIVIO']; ?>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
