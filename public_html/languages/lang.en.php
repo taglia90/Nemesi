@@ -34,6 +34,26 @@ $lang['ARCHIVIO_DESCRIZIONE'] = 'Description';
 $lang['ARCHIVIO_INSERISCI'] = 'Insert';
 $lang['ARCHIVIO_LISTA_ARCHIVIO'] = 'File list';
 
+//Conto
+
+$lang['CONTO_HEADLINE'] = 'Bank Accounts';
+$lang['CONTO_INSERIMENTO'] = 'Inserimento Conto';
+$lang['CONTO_NUMERO'] = 'Numero Conto';
+$lang['CONTO_TIPO'] = 'Tipo Conto';
+$lang['CONTO_INTESTAZIONE'] = 'Intestazione';
+$lang['CONTO_INDIRIZZO'] = 'Indirizzo';
+$lang['CONTO_CAP'] = 'Cap';
+$lang['CONTO_LOCALITA'] = 'Località';
+$lang['CONTO_PROVINCIA'] = 'Provincia';
+$lang['CONTO_DATA_APERTURA'] = 'Data Apertura';
+$lang['CONTO_DATA_CHIUSURA'] = 'Data Chiusura';
+$lang['CONTO_IBAN'] = 'IBAN';
+$lang['CONTO_VALUTA'] = 'Valuta';
+$lang['CONTO_INSERISCI'] = 'Inserisci';
+$lang['CONTO_LISTA_CONTI'] = 'Lista Conti';
+
+
+?>
 
 
 ?>
