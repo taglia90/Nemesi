@@ -12,8 +12,8 @@ $config = array(
     "db" => array(
         "db1" => array(
             "dbname" => "Nemesi",
-            "username" => "root",
-            "password" => "password",
+            "username" => "Nemesi",
+            "password" => "Nemesi",
             "host" => "localhost"
         )/*,
         "db2" => array(
@@ -57,4 +57,6 @@ defined("TEMPLATES_PATH")
 ini_set("error_reporting", "true");
 error_reporting(E_ALL|E_STRCT);
  
+
+
 ?>

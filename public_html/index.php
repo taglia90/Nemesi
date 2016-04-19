@@ -28,4 +28,4 @@ require_once ("leftPanel.php");
 </script>
 
 </body>
-</html>		
+</html>
