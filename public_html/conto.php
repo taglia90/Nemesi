@@ -18,8 +18,10 @@ if(isset($_POST['inserisci']))
 	$dataChiusura = trim($_POST["dataChiusura"]);
 	$iban = trim($_POST["iban"]);
 	$valuta = trim($_POST["valuta"]);
-	
+		
 	$inserisci = true;
+	
+	
 	
 	/*if(isset($_POST["banca"])){ //questo è necessario per la select disabled
 		$banca = $_POST["banca"];
@@ -50,23 +52,24 @@ if(isset($_POST['inserisci']))
 		//Inserisco i dati nel DB
 		$sql = "";
 		
-			//Caso in cui la banca esiste
-			$sql = "INSERT INTO t_conto (nr_conto, id_tipo_conto, intestazione, indirizzo, 
-			cap, localita, provincia, data_apertura, data_chiusura, iban, valuta)
-			VALUES (".$numero.",".$tipo.",'".$intestazione."','".$indirizzo."','".$cap."'
-			,'".$localita."','".$provincia."','".$dataApertura."','".$dataChiusura."'
-			,'".$iban."','".$valuta."')";
-			
-			
-			if ($conn->query($sql) === TRUE) {
-			$queryResult = "Record inserito correttamente";
-			} else {
-				$queryResult = $conn->error;
-			}
+		//Caso in cui la banca esiste
+		$sql = "INSERT INTO t_conto (nr_conto, id_tipo_conto, intestazione, indirizzo, 
+		cap, localita, provincia, data_apertura, data_chiusura, iban, valuta)
+		VALUES (".$numero.",".$tipo.",'".$intestazione."','".$indirizzo."','".$cap."'
+		,'".$localita."','".$provincia."','".$dataApertura."','".$dataChiusura."'
+		,'".$iban."','".$valuta."')";
+		
+		
+		if ($conn->query($sql) === TRUE) {
+		$queryResult = "Record inserito correttamente";
+		} else {
+			$queryResult = $conn->error;
+		}
 
-			$conn->close();
+		$conn->close();
 			
 	}
+	
 }
 ///
 
@@ -81,17 +84,25 @@ function draw_table(){
 		die("Errore di connessione: " . $conn->connect_error);
 	} 
 
+
 	$sql = "SELECT a.id_conto, a.nr_conto, a.id_tipo_conto
-			FROM t_conto a 
-			order by 1";
+			FROM t_conto a ";
+			
+	
+	 if(isset($_POST["idArchivio"])){
+ 		$sql.= " WHERE a.id_archivio = ".$_POST["idArchivio"]." ";
+ 	}
+		
+	$sql .= " order by 1";
+
 	$result = $conn->query($sql);
 
 	//Genero la stringa html
 	$str_table ="<table class='table table-hover' id='archivioTable'>
 				<thead>
 					<tr>
-						<th width='40%'>Numero Conto</th>
-						<th width='40%'>Nome Cliente</th>
+						<th width='42%'>Numero Conto</th>
+						<th width='42%'>Tipo Conto</th>
 						<th width='55px'></th>
 						<th width='55px'></th>
 					</tr>
@@ -119,6 +130,35 @@ function draw_table(){
 }
 ///						
 
+//
+function create_dropdown(){
+	//recupero i dati dell'archivio
+	global $config;
+	$conn = new mysqli($config["db"]["db1"]["host"], $config["db"]["db1"]["username"], $config["db"]["db1"]["password"], $config["db"]["db1"]["dbname"]);
+
+	if ($conn->connect_error) {
+		die("Errore di connessione: " . $conn->connect_error);
+	} 
+
+	$sql = "SELECT id_tipo_conto, tipo FROM l_tipo_conto"; 
+
+	$result = $conn->query($sql);
+
+	//Genero la stringa html
+	$str_select ="<select id='tipoConto' name='tipoConto' class=form-control>
+				  <option value=0/>";
+
+	//Trasformo i risultati della query in associativi
+	while ($row = $result->fetch_assoc()) {
+	$str_select.="<option value='".$row["id_tipo_conto"]."'>".$row["tipo"]."</option>";
+	}
+	$str_select.= "</select>";
+
+	$conn->close();
+
+	return $str_select;
+}
+///
 
 require_once ("leftPanel.php");
 ?>
@@ -150,7 +190,7 @@ require_once ("leftPanel.php");
 								</div>
 								<div class="form-group">
 									<label><?php echo $lang['CONTO_TIPO']; ?></label>
-									<input class="form-control" type="text" name="tipo">
+									<?php echo create_dropdown(); ?> 
 <!-- 
 									<p class="help-block" style="color:red;"><?php echo $nameErr;?></p>
  -->
@@ -194,14 +234,14 @@ require_once ("leftPanel.php");
 								</div>
 								<div class="form-group" style="width:49%; margin-right:0px; float:left;">
 									<label><?php echo $lang['CONTO_DATA_APERTURA']; ?></label>
-									<input class="form-control" type="text" name="dataApertura">
+									<input class="form-control" type="text" name="dataApertura" id="datepicker1">
 <!-- 
 									<p class="help-block" style="color:red;"><?php echo $nameErr;?></p>
  -->
 								</div>
 								<div class="form-group" style="width:49%; margin-right:0px; float:right;">
 									<label><?php echo $lang['CONTO_DATA_CHIUSURA'] ?></label>
-									<input class="form-control" type="text" name="dataChiusura">
+									<input class="form-control" type="text" name="dataChiusura" id="datepicker2">
 <!-- 
 									<p class="help-block" style="color:red;"><?php echo $nameErr;?></p>
  -->
@@ -255,6 +295,9 @@ setActiveMenu("archivio");
 
 $(document).ready(function(){
     $('#archivioTable').DataTable();
+    $.datepicker.setDefaults({dateFormat: 'dd/mm/yy'});
+	$('#datepicker1').datepicker();
+	$('#datepicker2').datepicker();
 });
 
 </script>

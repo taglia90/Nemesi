@@ -124,9 +124,11 @@ function draw_table(){
 					  	<td>".$row["nome_cliente"]."</td> 
 						<td>".$row["nome"]."</td>
 						<td>".$row["descrizione"]."</td>
-						<td><button class='btn btn-primary'>
+						<td><form method='post' action='conto.php'>
+							<button type='submit' name='idArchivio' value='".$row["id_archivio"]."'
+							class='btn btn-primary'>
 							<i class='fa fa-search-plus'></i>
-						  </button></td>
+						  </button></form></td>
 						<td><button class='btn btn-primary'>
 							<i class='fa fa-wrench'></i>
 						  </button></td>
