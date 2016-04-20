@@ -1,11 +1,13 @@
 <?php
 // inizializzazione della sessione
 session_start();
+require_once ("../config.php");
+include_once 'utils.php';
 // se la sessione di autenticazione
-// è già impostata non sarà necessario effettuare il login
-// e il browser verrà reindirizzato alla pagina di scrittura dei post
+// ï¿½ giï¿½ impostata non sarï¿½ necessario effettuare il login
+// e il browser verrï¿½ reindirizzato alla pagina di scrittura dei post
 if (isset($_SESSION['login'])) {
-    // reindirizzamento alla homepage in caso di login già in memoria
+    // reindirizzamento alla homepage in caso di login giï¿½ in memoria
     header("Location: index.php");
 }
 // controllo sul parametro d'invio
@@ -22,24 +24,22 @@ if (isset($_POST['submit']) && (trim($_POST['submit']) == "Login")) {
         $password = sha1($password);
         // inclusione del file della classe
         include "funzioni_mysql.php";
-        // istanza della classe
-        $data = new MysqlClass();
         // chiamata alla funzione di connessione
-        $data->connetti();
+        $conn = connetti();
         // interrogazione della tabella
-        $auth = $data->query(
-                "SELECT id_login FROM login WHERE username = '$username' AND password = '$password'");
+        $sqlString = "SELECT id_login FROM login WHERE username = '".$username."' AND password = '".$password."'";
+        $auth = $conn->query($sqlString);
         // controllo sul risultato dell'interrogazione
-        if (mysql_num_rows($auth) == 0) {
+        if ($auth->num_rows == 0) {
             // reindirizzamento alla homepage in caso di insuccesso
             header("Location: login.php");
         } else {
             // chiamata alla funzione per l'estrazione dei dati
-            $res = $data->estrai($auth);
+            $res = $auth->fetch_assoc();
             // creazione del valore di sessione
-            $_SESSION['login'] = $res->id_login;
+            $_SESSION['login'] = $res["id_login"];
             // disconnessione da MySQL
-            $data->disconnetti();
+            $conn->close();
             // reindirizzamento alla pagina di amministrazione in caso di
             // successo
             header("Location: index.php");

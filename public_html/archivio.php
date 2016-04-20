@@ -30,7 +30,7 @@ if(isset($_POST['inserisci']))
 	//Effettuo l'inserimento se tutti i dati obbligatori sono stati compilati
 	if($inserisci){
 		
-		$conn = new mysqli($config["db"]["db1"]["host"], $config["db"]["db1"]["username"], $config["db"]["db1"]["password"], $config["db"]["db1"]["dbname"]);
+		$conn = connetti();
 		
 		if ($conn->connect_error) {
 			die("Errore di connessione: " . $conn->connect_error);
@@ -64,7 +64,7 @@ if(isset($_POST['inserisci']))
 			}
 			$conn->close();
 			
-			$conn = new mysqli($config["db"]["db1"]["host"], $config["db"]["db1"]["username"], $config["db"]["db1"]["password"], $config["db"]["db1"]["dbname"]);
+			$conn = connetti();
 			if ($conn->connect_error) {
 				die("Errore di connessione: " . $conn->connect_error);
 			} 
@@ -88,8 +88,7 @@ if(isset($_POST['inserisci']))
 function draw_table(){
 
 	//recupero i dati dell'archivio
-	global $config;
-	$conn = new mysqli($config["db"]["db1"]["host"], $config["db"]["db1"]["username"], $config["db"]["db1"]["password"], $config["db"]["db1"]["dbname"]);
+	$conn = connetti();
 
 	if ($conn->connect_error) {
 		die("Errore di connessione: " . $conn->connect_error);
@@ -148,8 +147,7 @@ function draw_table(){
 
 function create_dropdown(){
 	//recupero i dati dell'archivio
-	global $config;
-	$conn = new mysqli($config["db"]["db1"]["host"], $config["db"]["db1"]["username"], $config["db"]["db1"]["password"], $config["db"]["db1"]["dbname"]);
+	$conn = connetti();
 
 	if ($conn->connect_error) {
 		die("Errore di connessione: " . $conn->connect_error);
@@ -176,7 +174,7 @@ function create_dropdown(){
 if(isset($_POST['deleteRow']))
 { 	
 	
-	$conn = new mysqli($config["db"]["db1"]["host"], $config["db"]["db1"]["username"], $config["db"]["db1"]["password"], $config["db"]["db1"]["dbname"]);
+	$conn = connetti();
 	if ($conn->connect_error) {
 		die("Errore di connessione: " . $conn->connect_error);
 	} 

@@ -5,6 +5,7 @@ if (isset($_SESSION['login'])) {
     // load up your config file
     require_once ("../config.php");
     include_once 'common.php';
+    include_once 'utils.php';
     
     ?>
 
