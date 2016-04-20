@@ -6,7 +6,7 @@ session_start();
 // e il browser verrà reindirizzato alla pagina di scrittura dei post
 if (isset($_SESSION['login'])) {
     // reindirizzamento alla homepage in caso di login mancato
-    header("Location: login.php");
+    header("Location: index.php");
 }
 // controllo sul parametro d'invio
 if (isset($_POST['submit']) && (trim($_POST['submit']) == "Login")) {
