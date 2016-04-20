@@ -1,8 +1,12 @@
-<?php 
-//load up your config file
- require_once("../config.php");
- include_once 'common.php';
-?>
+ <?php
+session_start();
+if (isset($_SESSION['login'])) {
+    
+    // load up your config file
+    require_once ("../config.php");
+    include_once 'common.php';
+    
+    ?>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -50,3 +54,9 @@
             </div>
  -->
 		</nav>
+
+<?php
+} else {
+    header("Location: login.php");
+}
+?>

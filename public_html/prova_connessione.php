@@ -6,7 +6,7 @@ $data = new MysqlClass();
 // connessione a MySQL
 $data->connetti();
 // chiamata alla funzione per la creazione del database
-$data->query("");
+$data->query("qua inserisco la query");
 // disconnessione
 $data->disconnetti();
 ?>

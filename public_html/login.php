@@ -5,7 +5,7 @@ session_start();
 // è già impostata non sarà necessario effettuare il login
 // e il browser verrà reindirizzato alla pagina di scrittura dei post
 if (isset($_SESSION['login'])) {
-    // reindirizzamento alla homepage in caso di login mancato
+    // reindirizzamento alla homepage in caso di login già in memoria
     header("Location: index.php");
 }
 // controllo sul parametro d'invio
