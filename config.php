@@ -12,8 +12,8 @@ $config = array(
     "db" => array(
         "db1" => array(
             "dbname" => "Nemesi",
-            "username" => "root",
-            "password" => "password",
+            "username" => "Nemesi",
+            "password" => "Nemesi",
             "host" => "localhost"
         )/*,
         "db2" => array(

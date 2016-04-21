@@ -23,7 +23,7 @@ if (isset($_POST['submit']) && (trim($_POST['submit']) == "Login")) {
         $password = trim(filter_var($_POST['password'], FILTER_SANITIZE_STRING));
         $password = sha1($password);
         // inclusione del file della classe
-        include "funzioni_mysql.php";
+        //include "funzioni_mysql.php";
         // chiamata alla funzione di connessione
         $conn = connetti();
         // interrogazione della tabella
