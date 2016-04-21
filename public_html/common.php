@@ -1,6 +1,6 @@
 <?php
-//session_start();
-header('Cache-control: private'); // IE 6 FIX
+
+//header('Cache-control: private'); // IE 6 FIX
 
 if (isSet($_GET['lang'])) {
     $lang = $_GET['lang'];
@@ -8,7 +8,7 @@ if (isSet($_GET['lang'])) {
     // register the session and set the cookie
     $_SESSION['lang'] = $lang;
     
-    setcookie('lang', $lang, time() + (3600 * 24 * 365)); // 365 giorni di
+    //setcookie('lang', $lang, time() + (3600 * 24 * 365)); // 365 giorni di
                                                           // validità
 } else 
     if (isSet($_SESSION['lang'])) {

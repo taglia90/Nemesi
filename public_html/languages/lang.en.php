@@ -55,5 +55,3 @@ $lang['CONTO_LISTA_CONTI'] = 'Lista Conti';
 
 ?>
 
-
-?>

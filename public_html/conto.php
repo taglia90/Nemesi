@@ -255,7 +255,7 @@ require_once ("leftPanel.php");
 									<p class="help-block" style="color:red;"><?php echo $nameErr;?></p>
  -->
 								</div>
-                                 <div> &nbsp </div>
+                                 <div> &nbsp; </div>
                                         <button type="submit" name="inserisci" class="btn btn-primary"><?php echo $lang['CONTO_INSERISCI']; ?></button>
 										 <p class="help-block" float=right; style="color:green;"><?php echo $queryResult;?></p>
                                     </form>

@@ -1,4 +1,4 @@
-﻿<?php
+﻿<?php 
 require_once ("header.php");
 
 //VARIABILI DELLA PAGINA
@@ -250,7 +250,7 @@ require_once ("leftPanel.php");
                                             <label><?php echo $lang['ARCHIVIO_DESCRIZIONE']; ?></label>
                                             <input class="form-control" type="text" name="descrizione">
  							    </div>
-                                 <div> &nbsp </div>
+                                 <div> &nbsp; </div>
                                         <button type="submit" name="inserisci" class="btn btn-primary"><?php echo $lang['ARCHIVIO_INSERISCI']; ?></button>
 										 <p class="help-block" float=right; style="color:green;"><?php echo $queryResult;?></p>
                                     </form>
