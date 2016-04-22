@@ -252,7 +252,7 @@ require_once ("leftPanel.php");
  							    </div>
                                  <div> &nbsp; </div>
                                         <button type="submit" name="inserisci" class="btn btn-primary"><?php echo $lang['ARCHIVIO_INSERISCI']; ?></button>
-										 <p class="help-block" float=right; style="color:green;"><?php echo $queryResult;?></p>
+										 <p class="help-block" style="color:green;"><?php echo $queryResult;?></p>
                                     </form>
                             </div>
                         </div>
