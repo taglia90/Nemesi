@@ -9,7 +9,6 @@ $numErr = $tipoErr = "";
 // INSERIMENTO IN ARCHIVIO
 if (isset($_POST['inserisci'])) {
     $numero = trim($_POST["numero"]);
-    // $tipo = trim($_POST["tipo"]);
     $intestazione = trim($_POST["intestazione"]);
     $indirizzo = trim($_POST["indirizzo"]);
     $cap = trim($_POST["cap"]);
@@ -352,7 +351,7 @@ require_once ("leftPanel.php");
 <?php require_once("footer.php");?>
 <!-- CUSTOM SCRIPT PER QUESTA PAGINA -->
 <script>
-setActiveMenu("archivio");
+setActiveMenu("conto");
 
 $(document).ready(function(){
     $('#archivioTable').DataTable();

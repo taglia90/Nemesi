@@ -22,6 +22,7 @@ $lang['HOME_PROVA'] = 'Вставьте что-то здесь';
 $lang['LEFT_MENU_HOME'] = 'Home';
 $lang['LEFT_MENU_ARCHIVIO'] = 'Archivio';
 $lang['LEFT_MENU_LINGUA'] = 'Lingua';
+$lang['LEFT_MENU_CONTI'] = 'Conti';
 
 // Archivio
 
@@ -31,7 +32,6 @@ $lang['ARCHIVIO_NOME_CLIENTE'] = 'Nome cliente';
 $lang['ARCHIVIO_BANCA'] = 'Banca';
 $lang['ARCHIVIO_NUOVA_BANCA'] = 'Nuova banca';
 $lang['ARCHIVIO_DESCRIZIONE'] = 'Descrizione';
-$lang['ARCHIVIO_INSERISCI'] = 'Inserisci';
 $lang['ARCHIVIO_LISTA_ARCHIVIO'] = 'Lista archivio';
 
 // Conto
@@ -53,5 +53,9 @@ $lang['CONTO_INSERISCI'] = 'Inserisci';
 $lang['CONTO_LISTA_CONTI'] = 'Lista Conti';
 $lang['CONTO_ARCHIVIO'] = 'Archivio di riferimento';
 
+// Button Generici
+
+$lang['BUTTON_INSERISCI'] = 'Inserisci';
+$lang['BUTTON_MODIFICA'] = 'Modifica';
 
 ?>
