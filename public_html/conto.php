@@ -119,9 +119,12 @@ function draw_table ()
 						<td><button class='btn btn-primary'>
 							<i class='fa fa-wrench'></i>
 						  </button></td>
-						<td><button class='btn btn-primary'>
-						<i class='fa fa-trash'></i>
-						  </button></td>
+						<td><form method='post' action='conto.php'>
+					  	   <button type='submit' name='deleteRow'
+					  	        class='btn btn-primary' value='" . 
+					  	        $row["id_conto"] . "'>
+					  	    <i class='fa fa-trash'></i>
+						  </button></form></td>
 					  </tr>";
     }
     $str_table .= "</tbody></table>";
@@ -205,6 +208,26 @@ function create_dropdown_archivio ()
     return $str_select;
 }
 // /
+
+if (isset($_POST['deleteRow'])) {
+
+    $conn = connetti();
+    if ($conn->connect_error) {
+        die("Errore di connessione: " . $conn->connect_error);
+    }
+
+    $sql = "DELETE FROM t_conto
+			WHERE id_conto =" . $_POST['deleteRow'] . " ";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "<script>alert('Eliminazione effettuata correttamente');</script>";
+    } else {
+        echo "<script>alert('Errore eliminazione: " . $conn->connect_error .
+        "');</script>";
+    }
+
+    $conn->close();
+}
 
 require_once ("leftPanel.php");
 ?>

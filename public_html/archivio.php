@@ -157,8 +157,7 @@ function draw_table ()
 						<td><form method='post' action='archivio.php'>
 							<button type='submit'  name='editArchivio'
 							class='btn btn-primary' value='" .
-                 $row["id_archivio"] .
-                 "'>
+                 $row["id_archivio"] ."'>
 							<i class='fa fa-wrench'></i>
 						  </button></form></td>
 						<td><form method='post' action='archivio.php'>
