@@ -49,7 +49,6 @@ $lang['CONTO_DATA_APERTURA'] = 'Data Apertura';
 $lang['CONTO_DATA_CHIUSURA'] = 'Data Chiusura';
 $lang['CONTO_IBAN'] = 'IBAN';
 $lang['CONTO_VALUTA'] = 'Valuta';
-$lang['CONTO_INSERISCI'] = 'Inserisci';
 $lang['CONTO_LISTA_CONTI'] = 'Lista Conti';
 $lang['CONTO_ARCHIVIO'] = 'Archivio di riferimento';
 

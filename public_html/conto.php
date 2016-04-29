@@ -3,11 +3,14 @@ require_once ("header.php");
 
 // VARIABILI DELLA PAGINA
 $queryResult = "";
-
 $numErr = $tipoErr = "";
+$editPage = false;
 
-// INSERIMENTO IN ARCHIVIO
+// INSERIMENTO O MODIFICA CONTO
 if (isset($_POST['inserisci'])) {
+    // isEdit = true se è una pagina di modifica
+    $isEdit = $_POST['inserisci'];
+    
     $numero = trim($_POST["numero"]);
     $intestazione = trim($_POST["intestazione"]);
     $indirizzo = trim($_POST["indirizzo"]);
@@ -18,7 +21,7 @@ if (isset($_POST['inserisci'])) {
     $dataChiusura = trim($_POST["dataChiusura"]);
     $iban = trim($_POST["iban"]);
     $valuta = trim($_POST["valuta"]);
-    $archivio = trim($_POST["archivio"]);
+    $archivio = trim($_POST["arch"]);
     
     $inserisci = true;
     
@@ -59,15 +62,33 @@ if (isset($_POST['inserisci'])) {
             die("Errore di connessione: " . $conn->connect_error);
         }
         
-        // Caso in cui la banca esiste
-        $sql = "INSERT INTO t_conto (nr_conto, id_tipo_conto, intestazione, indirizzo, 
-		cap, localita, provincia, data_apertura, data_chiusura, iban, valuta, id_archivio)
-		VALUES (" . $numero . "," . $tipo . ",'" . $intestazione . "','" .
-                 $indirizzo . "','" . $cap . "','" . $localita . "','" .
-                 $provincia . "',".$dataApertura.",".$dataChiusura.",'" . $iban . "','" . $valuta .
-                 "', ".$archivio.")";
-        
-        //echo $sql;        
+        //Inserisco i dati nel DB
+        $sql = "";
+        if ($isEdit) {
+            $sql = "UPDATE t_conto SET 
+                    id_archivio = " . $archivio . ",
+                    nr_conto = " . $numero . ", 
+                    id_tipo_conto = " . $tipo . ",
+                    intestazione = '" . $intestazione . "',
+                    indirizzo = '" . $indirizzo . "',
+                    cap = '" . $cap . "',
+                    localita = '" . $localita . "',
+                    provincia = '" . $provincia . "',
+                    data_apertura = " . $dataApertura . ",
+                    data_chiusura = " . $dataChiusura . ",
+                    iban = '" . $iban . "',
+                    valuta = '" . $valuta . "'
+                    WHERE id_CONTO = ".$_POST["idConto"];
+         
+        } else {
+            $sql = "INSERT INTO t_conto (nr_conto, id_tipo_conto, intestazione, indirizzo, 
+    		cap, localita, provincia, data_apertura, data_chiusura, iban, valuta, id_archivio)
+    		VALUES (" . $numero . "," . $tipo . ",'" . $intestazione . "','" .
+                     $indirizzo . "','" . $cap . "','" . $localita . "','" .
+                     $provincia . "',".$dataApertura.",".$dataChiusura.",'" . $iban . "','" . $valuta .
+                     "', ".$archivio.")";
+        }
+
         if ($conn->query($sql) === TRUE) {
             $queryResult = "Record inserito correttamente";
         } else {
@@ -100,7 +121,7 @@ function draw_table ()
     $result = $conn->query($sql);
     
     // Genero la stringa html
-    $str_table = "<table class='table table-hover' id='archivioTable'>
+    $str_table = "<table class='table table-hover' id='contoTable'>
 				<thead>
 					<tr>
 						<th width='42%'>Numero Conto</th>
@@ -116,9 +137,11 @@ function draw_table ()
         $str_table .= "<tr>
 						<td>" . $row["nr_conto"] . "</td>
 					  	<td>" . $row["id_tipo_conto"] . "</td> 
-						<td><button class='btn btn-primary'>
+						<td><form method='post' action='conto.php'>
+					  	   <button  type='submit'  name='editConto'
+					  	   class='btn btn-primary' value='" . $row["id_conto"] ."'>
 							<i class='fa fa-wrench'></i>
-						  </button></td>
+						  </button></form></td>
 						<td><form method='post' action='conto.php'>
 					  	   <button type='submit' name='deleteRow'
 					  	        class='btn btn-primary' value='" . 
@@ -171,7 +194,6 @@ function create_dropdown_archivio ()
 {
     //setto gli attributi nel caso l'archivio sia stato selezionato
     $sqlWhere = "";
-    $disabled = "";
     $option0 = "<option value='0'/>";
   
     if (isset($_POST["idArchivio"])) {
@@ -193,7 +215,7 @@ function create_dropdown_archivio ()
     $result = $conn->query($sql);
     
     // Genero la stringa html
-    $str_select = "<select id='archivio' name='archivio' class=form-control ".$disabled.">";
+    $str_select = "<select id='arch' name='arch' class=form-control>";
     $str_select.= $option0;
         
     // Trasformo i risultati della query in associativi
@@ -229,8 +251,29 @@ if (isset($_POST['deleteRow'])) {
     $conn->close();
 }
 
+// PASSA I CAMPI DA INIZIALIZZARE
+if (isset($_POST['editConto'])) {
+
+    $conn = connetti();
+    if ($conn->connect_error) {
+        die("Errore di connessione: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT * FROM t_conto
+			WHERE id_conto = " . $_POST['editConto'] .
+			" ";
+    
+    $result = $conn->query($sql);
+
+    $conn->close();
+
+    $editPage = true;
+}
+// /
+
 require_once ("leftPanel.php");
 ?>
+
 
 
 <!-- /. NAV SIDE  -->
@@ -251,6 +294,7 @@ require_once ("leftPanel.php");
 					<div class="panel-body">
 						<form method="post"
 							action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+							<input type="hidden" name="idConto" id="idConto">
 							<div class="form-group">
 								<label><?php echo $lang['CONTO_ARCHIVIO']; ?></label>
 								<?php echo create_dropdown_archivio(); ?> 
@@ -260,7 +304,7 @@ require_once ("leftPanel.php");
 							</div>
 							<div class="form-group">
 								<label><?php echo $lang['CONTO_NUMERO']; ?></label> <input
-									class="form-control" type="text" name="numero">
+									class="form-control" type="text" id="numero" name="numero">
 
 								<p class="help-block" style="color: red;"><?php echo $numErr;?></p>
 
@@ -274,7 +318,7 @@ require_once ("leftPanel.php");
 							</div>
 							<div class="form-group">
 								<label><?php echo $lang['CONTO_INTESTAZIONE']; ?></label> <input
-									class="form-control" type="text" name="intestazione">
+									class="form-control" type="text" id="intestazione" name="intestazione">
 								<!-- 
 									<p class="help-block" style="color:red;"><?php echo $nameErr;?></p>
  -->
@@ -282,7 +326,7 @@ require_once ("leftPanel.php");
 							<div class="form-group"
 								style="width: 66%; margin-right: 0px; float: left;">
 								<label><?php echo $lang['CONTO_INDIRIZZO']; ?></label> <input
-									class="form-control" type="text" name="indirizzo">
+									class="form-control" type="text" id="indirizzo" name="indirizzo">
 								<!-- 
 									<p class="help-block" style="color:red;"><?php echo $nameErr;?></p>
  -->
@@ -292,7 +336,7 @@ require_once ("leftPanel.php");
 								style="width: 32%; margin-right: 0px; float: right;">
 
 								<label><?php echo $lang['CONTO_CAP']; ?></label> <input
-									class="form-control" type="text" name="cap">
+									class="form-control" type="text" id="cap" name="cap">
 								<!-- 
 									<p class="help-block" style="color:red;"><?php echo $nameErr;?></p>
  -->
@@ -300,7 +344,7 @@ require_once ("leftPanel.php");
 							<div class="form-group"
 								style="width: 83%; margin-right: 0px; float: left;">
 								<label><?php echo $lang['CONTO_LOCALITA']; ?></label> <input
-									class="form-control" type="text" name="localita">
+									class="form-control" type="text" id="localita" name="localita">
 								<!-- 
 									<p class="help-block" style="color:red;"><?php echo $nameErr;?></p>
  -->
@@ -308,7 +352,7 @@ require_once ("leftPanel.php");
 							<div class="form-group"
 								style="width: 15%; margin-right: 0px; float: right;">
 								<label><?php echo $lang['CONTO_PROVINCIA']; ?></label> <input
-									class="form-control" type="text" name="provincia">
+									class="form-control" type="text" id="provincia" name="provincia">
 								<!-- 
 									<p class="help-block" style="color:red;"><?php echo $nameErr;?></p>
  -->
@@ -316,7 +360,7 @@ require_once ("leftPanel.php");
 							<div class="form-group"
 								style="width: 49%; margin-right: 0px; float: left;">
 								<label><?php echo $lang['CONTO_DATA_APERTURA']; ?></label> <input
-									class="form-control" type="text" name="dataApertura"
+									class="form-control" type="text" id="dataApertura" name="dataApertura"
 									id="datepicker1">
 								<!-- 
 									<p class="help-block" style="color:red;"><?php echo $nameErr;?></p>
@@ -325,7 +369,7 @@ require_once ("leftPanel.php");
 							<div class="form-group"
 								style="width: 49%; margin-right: 0px; float: right;">
 								<label><?php echo $lang['CONTO_DATA_CHIUSURA'] ?></label> <input
-									class="form-control" type="text" name="dataChiusura"
+									class="form-control" type="text" id="dataChiusura" name="dataChiusura"
 									id="datepicker2">
 								<!-- 
 									<p class="help-block" style="color:red;"><?php echo $nameErr;?></p>
@@ -333,20 +377,21 @@ require_once ("leftPanel.php");
 							</div>
 							<div class="form-group">
 								<label><?php echo $lang['CONTO_IBAN'] ?></label> <input
-									class="form-control" type="text" name="iban">
+									class="form-control" type="text" id="iban" name="iban">
 								<!-- 
 									<p class="help-block" style="color:red;"><?php echo $nameErr;?></p>
  -->
 							</div>
 							<div class="form-group">
 								<label><?php echo $lang['CONTO_VALUTA'] ?></label> <input
-									class="form-control" type="text" name="valuta">
+									class="form-control" type="text" id="valuta" name="valuta">
 								<!-- 
 									<p class="help-block" style="color:red;"><?php echo $nameErr;?></p>
  -->
 							</div>
 							<div>&nbsp;</div>
-							<button type="submit" name="inserisci" class="btn btn-primary"><?php echo $lang['CONTO_INSERISCI']; ?></button>
+							<button type="submit" id="insertEdit" name="inserisci" 
+								value="false" class="btn btn-primary"><?php echo $lang['BUTTON_INSERISCI']; ?></button>
 							<p class="help-block" style="color: green;"><?php echo $queryResult;?></p>
 						</form>
 					</div>
@@ -371,16 +416,41 @@ require_once ("leftPanel.php");
 	<!-- /. PAGE WRAPPER  -->
 </div>
 <!-- /. WRAPPER  -->
-<?php require_once("footer.php");?>
+
+<?php require_once("footer.php"); ?>
 <!-- CUSTOM SCRIPT PER QUESTA PAGINA -->
 <script>
 setActiveMenu("conto");
 
 $(document).ready(function(){
-    $('#archivioTable').DataTable();
+	
+    $('#contoTable').DataTable();
     $.datepicker.setDefaults({dateFormat: 'dd/mm/yy'});
 	$('#datepicker1').datepicker();
 	$('#datepicker2').datepicker();
+	<?php
+    // INIZIALIZZO I CAMPI SE SONO IN EDIT
+    if ($editPage) {
+         $row = $result->fetch_assoc();
+//         echo "alert('". date("d/m/Y", strtotime($row["data_apertura"])). " UUUU');";
+         echo "$('#arch').val(". $row["id_archivio"] .");
+               $('#numero').val(" . $row["nr_conto"] . ");   
+               $('#tipoConto').val('" . $row["id_tipo_conto"] . "');
+               $('#intestazione').val('" . $row["intestazione"] . "');
+               $('#indirizzo').val('" . $row["indirizzo"] . "');
+               $('#cap').val('" . $row["cap"] . "');
+               $('#localita').val('" . $row["localita"] . "');
+               $('#provincia').val('" . $row["provincia"] . "');
+               $('#dataApertura').val('" . date("d/m/Y", strtotime($row["data_apertura"])). "');
+               $('#dataChiusura').val('" . date("d/m/Y", strtotime($row["data_chiusura"])). "');
+               $('#iban').val('" . $row["iban"] . "');
+               $('#valuta').val('" . $row["valuta"] . "');
+               $('#idConto').val('" . $row["id_conto"] . "');
+               $('#insertEdit').val('true');
+               $('#insertEdit').html('" .
+               $lang['BUTTON_MODIFICA'] . "');";
+    }
+    ?>
 });
 
 </script>
