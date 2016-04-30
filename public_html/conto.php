@@ -360,8 +360,7 @@ require_once ("leftPanel.php");
 							<div class="form-group"
 								style="width: 49%; margin-right: 0px; float: left;">
 								<label><?php echo $lang['CONTO_DATA_APERTURA']; ?></label> <input
-									class="form-control" type="text" id="dataApertura" name="dataApertura"
-									id="datepicker1">
+									class="form-control" type="text" id="dataApertura" name="dataApertura">
 								<!-- 
 									<p class="help-block" style="color:red;"><?php echo $nameErr;?></p>
  -->
@@ -369,8 +368,7 @@ require_once ("leftPanel.php");
 							<div class="form-group"
 								style="width: 49%; margin-right: 0px; float: right;">
 								<label><?php echo $lang['CONTO_DATA_CHIUSURA'] ?></label> <input
-									class="form-control" type="text" id="dataChiusura" name="dataChiusura"
-									id="datepicker2">
+									class="form-control" type="text" id="dataChiusura" name="dataChiusura">
 								<!-- 
 									<p class="help-block" style="color:red;"><?php echo $nameErr;?></p>
  -->
@@ -426,8 +424,8 @@ $(document).ready(function(){
 	
     $('#contoTable').DataTable();
     $.datepicker.setDefaults({dateFormat: 'dd/mm/yy'});
-	$('#datepicker1').datepicker();
-	$('#datepicker2').datepicker();
+	$('#dataApertura').datepicker();
+	$('#dataChiusura').datepicker();
 	<?php
     // INIZIALIZZO I CAMPI SE SONO IN EDIT
     if ($editPage) {
