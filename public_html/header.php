@@ -6,6 +6,7 @@ if (isset($_SESSION['login'])) {
     require_once ("../config.php");
     include_once 'common.php';
     include_once 'utils.php';
+    include_once 'const.php';
     
     ?>
 

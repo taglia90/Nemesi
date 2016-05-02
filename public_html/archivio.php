@@ -9,7 +9,7 @@ $editPage = false;
 // INSERIMENTO O MODIFICA ARCHIVIO
 if (isset($_POST['inserisci'])) {
     // isEdit = true se è una pagina di modifica
-    $isEdit = $_POST['inserisci'];
+    $isEdit = $_POST['inserisci'];    
     
     $name = trim($_POST["nome_cliente"]);
     $nuovaBanca = trim($_POST["nuovaBanca"]);
@@ -44,13 +44,14 @@ if (isset($_POST['inserisci'])) {
         $sql2 = "";
         
         if ($banca != 0) { // Caso in cui la banca esiste
-            
+                        
             if ($isEdit) {
                 $sql = "UPDATE t_archivio SET 
                         nome_cliente = '" . $name . "',
                         banca = '" . $banca . "', 
                         descrizione = '" . $descrizione . "'
                         WHERE id_archivio = ".$_POST["idArc"];
+                
             } else {
             
                 $sql = "INSERT INTO t_archivio (nome_cliente, banca, descrizione)
@@ -96,7 +97,9 @@ if (isset($_POST['inserisci'])) {
                          $descrizione . "'
     			FROM l_banca
     			where nome = '" . $nuovaBanca . "'";
+                
             }
+
             if ($conn->query($sql2) === TRUE) {
                 $queryResult = "Record inserito correttamente";
             } else {
@@ -306,7 +309,7 @@ require_once ("leftPanel.php");
 							</div>
 							<div>&nbsp;</div>
 							<button type="submit" id="insertEdit" name="inserisci"
-								value="false" class="btn btn-primary"><?php echo $lang['BUTTON_INSERISCI']; ?></button>
+								value="0" class="btn btn-primary"><?php echo $lang['BUTTON_INSERISCI']; ?></button>
 							<p class="help-block" style="color: green;"><?php echo $queryResult;?></p>
 						</form>
 					</div>
@@ -349,7 +352,7 @@ $(document).ready(function(){
 	              $('#descrizione').val('" .
                  $row["descrizione"] . "');
 	              $('#idArc').val('" . $row["id_archivio"] . "');
-	              $('#insertEdit').val('true');
+	              $('#insertEdit').val(1);
 	              $('#insertEdit').html('" .
                  $lang['BUTTON_MODIFICA'] . "');";
     }

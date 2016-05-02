@@ -3,7 +3,7 @@ require_once ("header.php");
 
 // VARIABILI DELLA PAGINA
 $queryResult = "";
-$numErr = $tipoErr = "";
+$numErr = $tipoErr = $dataApErr = $dataChErr = "";
 $editPage = false;
 
 // INSERIMENTO O MODIFICA CONTO
@@ -42,12 +42,24 @@ if (isset($_POST['inserisci'])) {
     }
     
     if (!empty($dataApertura)) {
-        $dataApertura = "STR_TO_DATE('" . $dataApertura ."', '%d/%m/%Y')";
+        if (validate_date($dataApertura)){
+            $dataApertura = "STR_TO_DATE('" . $dataApertura ."', '%d/%m/%Y')";
+        } else {
+            $dataApErr = "Formato sbagliato. Inserire le date come gg/mm/aaaa";
+            $inserisci = false;
+        }
     } else {
-        $dataApertura = "null";
+        $dataApErr = "Campo Obbligatorio";
+        $inserisci = false;
     }
     
     if (!empty($dataChiusura)) {
+        if (validate_date($dataApertura)){
+            $dataApertura = "STR_TO_DATE('" . $dataApertura ."', '%d/%m/%Y')";
+        } else {
+            $dataApErr = "Formato sbagliato. Inserire le date come gg/mm/aaaa";
+            $inserisci = false;
+        }
         $dataChiusura = "STR_TO_DATE('" . $dataChiusura ."', '%d/%m/%Y')";
     } else {
         $dataChiusura = "null";
@@ -319,77 +331,52 @@ require_once ("leftPanel.php");
 							<div class="form-group">
 								<label><?php echo $lang['CONTO_INTESTAZIONE']; ?></label> <input
 									class="form-control" type="text" id="intestazione" name="intestazione">
-								<!-- 
-									<p class="help-block" style="color:red;"><?php echo $nameErr;?></p>
- -->
 							</div>
 							<div class="form-group"
 								style="width: 66%; margin-right: 0px; float: left;">
 								<label><?php echo $lang['CONTO_INDIRIZZO']; ?></label> <input
 									class="form-control" type="text" id="indirizzo" name="indirizzo">
-								<!-- 
-									<p class="help-block" style="color:red;"><?php echo $nameErr;?></p>
- -->
-
 							</div>
 							<div class="form-group"
 								style="width: 32%; margin-right: 0px; float: right;">
 
 								<label><?php echo $lang['CONTO_CAP']; ?></label> <input
 									class="form-control" type="text" id="cap" name="cap">
-								<!-- 
-									<p class="help-block" style="color:red;"><?php echo $nameErr;?></p>
- -->
 							</div>
 							<div class="form-group"
 								style="width: 83%; margin-right: 0px; float: left;">
 								<label><?php echo $lang['CONTO_LOCALITA']; ?></label> <input
 									class="form-control" type="text" id="localita" name="localita">
-								<!-- 
-									<p class="help-block" style="color:red;"><?php echo $nameErr;?></p>
- -->
 							</div>
 							<div class="form-group"
 								style="width: 15%; margin-right: 0px; float: right;">
 								<label><?php echo $lang['CONTO_PROVINCIA']; ?></label> <input
 									class="form-control" type="text" id="provincia" name="provincia">
-								<!-- 
-									<p class="help-block" style="color:red;"><?php echo $nameErr;?></p>
- -->
+
 							</div>
 							<div class="form-group"
 								style="width: 49%; margin-right: 0px; float: left;">
 								<label><?php echo $lang['CONTO_DATA_APERTURA']; ?></label> <input
 									class="form-control" type="text" id="dataApertura" name="dataApertura">
-								<!-- 
-									<p class="help-block" style="color:red;"><?php echo $nameErr;?></p>
- -->
+									<p class="help-block" style="color:red;"><?php echo $dataApErr;?></p>
 							</div>
 							<div class="form-group"
 								style="width: 49%; margin-right: 0px; float: right;">
 								<label><?php echo $lang['CONTO_DATA_CHIUSURA'] ?></label> <input
 									class="form-control" type="text" id="dataChiusura" name="dataChiusura">
-								<!-- 
-									<p class="help-block" style="color:red;"><?php echo $nameErr;?></p>
- -->
-							</div>
+									<p class="help-block" style="color:red;"><?php echo $dataChErr;?></p>
+							</div> 
 							<div class="form-group">
 								<label><?php echo $lang['CONTO_IBAN'] ?></label> <input
 									class="form-control" type="text" id="iban" name="iban">
-								<!-- 
-									<p class="help-block" style="color:red;"><?php echo $nameErr;?></p>
- -->
 							</div>
 							<div class="form-group">
 								<label><?php echo $lang['CONTO_VALUTA'] ?></label> <input
 									class="form-control" type="text" id="valuta" name="valuta">
-								<!-- 
-									<p class="help-block" style="color:red;"><?php echo $nameErr;?></p>
- -->
 							</div>
 							<div>&nbsp;</div>
 							<button type="submit" id="insertEdit" name="inserisci" 
-								value="false" class="btn btn-primary"><?php echo $lang['BUTTON_INSERISCI']; ?></button>
+								value="0" class="btn btn-primary"><?php echo $lang['BUTTON_INSERISCI']; ?></button>
 							<p class="help-block" style="color: green;"><?php echo $queryResult;?></p>
 						</form>
 					</div>
@@ -444,7 +431,7 @@ $(document).ready(function(){
                $('#iban').val('" . $row["iban"] . "');
                $('#valuta').val('" . $row["valuta"] . "');
                $('#idConto').val('" . $row["id_conto"] . "');
-               $('#insertEdit').val('true');
+               $('#insertEdit').val(1);
                $('#insertEdit').html('" .
                $lang['BUTTON_MODIFICA'] . "');";
     }
