@@ -5,6 +5,7 @@ require_once ("header.php");
 $queryResult = "";
 $numErr = $tipoErr = $dataApErr = $dataChErr = "";
 $editPage = false;
+$listaConti = $lang['CONTO_LISTA_CONTI'];
 
 // INSERIMENTO O MODIFICA CONTO
 if (isset($_POST['inserisci'])) {
@@ -150,12 +151,12 @@ function draw_table ()
 						<td>" . $row["nr_conto"] . "</td>
 					  	<td>" . $row["id_tipo_conto"] . "</td> 
 						<td><form method='post' action='conto.php'>
-					  	   <button  type='submit'  name='editConto'
+					  	   <button  type='submit' title='Modifica Conto' name='editConto'
 					  	   class='btn btn-primary' value='" . $row["id_conto"] ."'>
 							<i class='fa fa-wrench'></i>
 						  </button></form></td>
 						<td><form method='post' action='conto.php'>
-					  	   <button type='submit' name='deleteRow'
+					  	   <button type='submit' title='Elimina Conto' name='deleteRow'
 					  	        class='btn btn-primary' value='" . 
 					  	        $row["id_conto"] . "'>
 					  	    <i class='fa fa-trash'></i>
@@ -234,6 +235,11 @@ function create_dropdown_archivio ()
     while ($row = $result->fetch_assoc()) {
         $str_select .= "<option value='" . $row["id_archivio"] . "'>" .
                  $row["nome_cliente"] . " - " . $row["nome"] . "</option>";
+         
+         if (isset($_POST["idArchivio"])) {
+             global $listaConti, $lang; 
+             $listaConti.= $lang['CONTO_DELL_ARCHIVIO'].$row["nome_cliente"] . " - " . $row["nome"];
+         }
     }
     $str_select .= "</select>";
     
@@ -316,7 +322,7 @@ require_once ("leftPanel.php");
 							</div>
 							<div class="form-group">
 								<label><?php echo $lang['CONTO_NUMERO']; ?></label> <input
-									class="form-control" type="text" id="numero" name="numero">
+									class="form-control" type="number" id="numero" name="numero">
 
 								<p class="help-block" style="color: red;"><?php echo $numErr;?></p>
 
@@ -341,7 +347,7 @@ require_once ("leftPanel.php");
 								style="width: 32%; margin-right: 0px; float: right;">
 
 								<label><?php echo $lang['CONTO_CAP']; ?></label> <input
-									class="form-control" type="text" id="cap" name="cap">
+									class="form-control" type="number" id="cap" name="cap">
 							</div>
 							<div class="form-group"
 								style="width: 83%; margin-right: 0px; float: left;">
@@ -351,7 +357,7 @@ require_once ("leftPanel.php");
 							<div class="form-group"
 								style="width: 15%; margin-right: 0px; float: right;">
 								<label><?php echo $lang['CONTO_PROVINCIA']; ?></label> <input
-									class="form-control" type="text" id="provincia" name="provincia">
+									class="form-control" type="text" id="provincia" name="provincia" maxlength="2">
 
 							</div>
 							<div class="form-group"
@@ -368,7 +374,7 @@ require_once ("leftPanel.php");
 							</div> 
 							<div class="form-group">
 								<label><?php echo $lang['CONTO_IBAN'] ?></label> <input
-									class="form-control" type="text" id="iban" name="iban">
+									class="form-control" type="text" id="iban" name="iban" maxlength="28">
 							</div>
 							<div class="form-group">
 								<label><?php echo $lang['CONTO_VALUTA'] ?></label> <input
@@ -387,7 +393,7 @@ require_once ("leftPanel.php");
 		<!--    Hover Rows  -->
 		<div class="panel panel-default">
 			<div class="panel-heading">
-                            <?php echo $lang['CONTO_LISTA_CONTI']; ?>
+                            <?php echo $listaConti; ?>
                         </div>
 			<div class="panel-body">
 				<div class="table-responsive">

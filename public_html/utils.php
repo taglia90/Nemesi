@@ -29,5 +29,10 @@ function validate_date ($field)
     return validator(REGEX_DATE, $field);
 }
 
+function validate_number ($field)
+{
+    return validator(REGEX_NUMBER, $field);
+}
+
 // /
 ?>

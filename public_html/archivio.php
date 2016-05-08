@@ -152,19 +152,19 @@ function draw_table ()
 						<td>" . $row["nome"] . "</td>
 						<td>" . $row["descrizione"] . "</td>
 						<td><form method='post' action='conto.php'>
-							<button type='submit' name='idArchivio' value='" .
+							<button type='submit' title='Visualizza Conti' name='idArchivio' value='" .
                  $row["id_archivio"] . "'
 							class='btn btn-primary'>
 							<i class='fa fa-search-plus'></i>
 						  </button></form></td>
 						<td><form method='post' action='archivio.php'>
-							<button type='submit'  name='editArchivio'
+							<button type='submit' title='Modifica Archivio' name='editArchivio'
 							class='btn btn-primary' value='" .
                  $row["id_archivio"] ."'>
 							<i class='fa fa-wrench'></i>
 						  </button></form></td>
 						<td><form method='post' action='archivio.php'>
-							<button type='submit' name='deleteRow'
+							<button type='submit' title='Elimina Archivio' name='deleteRow'
 							class='btn btn-primary' value='" .
                  $row["id_archivio"] . "'><i class='fa fa-trash'></i>
 						  </button></form></td>
@@ -280,7 +280,7 @@ require_once ("leftPanel.php");
 									<?php echo create_dropdown(); ?> 
 									 <span class="form-group input-group-btn">
 									<button type="button" class="btn btn-primary"
-										onClick="showNuovaBanca();">
+										onClick="showNuovaBanca();" title="Nuova Banca">
 										<i class="glyphicon glyphicon-plus"></i>
 									</button>
 								</span>

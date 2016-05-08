@@ -51,6 +51,7 @@ $lang['CONTO_IBAN'] = 'IBAN';
 $lang['CONTO_VALUTA'] = 'Valuta';
 $lang['CONTO_LISTA_CONTI'] = 'Lista Conti';
 $lang['CONTO_ARCHIVIO'] = 'Archivio di riferimento';
+$lang['CONTO_DELL_ARCHIVIO'] = " dell'Archivio: ";
 
 // Button Generici
 
