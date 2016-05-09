@@ -23,6 +23,7 @@ $lang['LEFT_MENU_HOME'] = 'Home';
 $lang['LEFT_MENU_ARCHIVIO'] = 'File';
 $lang['LEFT_MENU_LINGUA'] = 'Language';
 $lang['LEFT_MENU_CONTI'] = 'Bank Accounts';
+$lang['LEFT_MENU_FIDI'] = 'Fidi';
 
 //Archivio
 
@@ -52,6 +53,15 @@ $lang['CONTO_VALUTA'] = 'Valuta';
 $lang['CONTO_LISTA_CONTI'] = 'Lista Conti';
 $lang['CONTO_ARCHIVIO'] = 'Archivio di riferimento';
 $lang['CONTO_DELL_ARCHIVIO'] = " dell'Archivio: ";
+
+//Fido
+$lang['FIDO_HEADLINE'] = 'Fidi';
+$lang['FIDO_INSERIMENTO'] = 'Inserimento Fido';
+$lang['FIDO_DATA'] = 'Data Affidamento';
+$lang['FIDO_LISTA_FIDI'] = 'Lista Fidi';
+$lang['FIDO_IMPORTO'] = 'Importo';
+$lang['FIDO_DIF'] = '% DIF';
+$lang['FIDO_SCAGLIONE'] = 'SCAGLIONE';
 
 // Button Generici
 

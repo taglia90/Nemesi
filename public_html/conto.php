@@ -124,8 +124,9 @@ function draw_table ()
         die("Errore di connessione: " . $conn->connect_error);
     }
     
-    $sql = "SELECT a.id_conto, a.nr_conto, a.id_tipo_conto
-			FROM t_conto a ";
+    $sql = "SELECT a.id_conto, a.nr_conto, b.tipo
+			FROM t_conto a LEFT JOIN l_tipo_conto b 
+            ON a.id_tipo_conto = b.id_tipo_conto";
     if (isset($_POST["idArchivio"])) {
         $sql .= " WHERE a.id_archivio = " . $_POST["idArchivio"] . " ";
     }
@@ -149,7 +150,7 @@ function draw_table ()
     while ($row = $result->fetch_assoc()) {
         $str_table .= "<tr>
 						<td>" . $row["nr_conto"] . "</td>
-					  	<td>" . $row["id_tipo_conto"] . "</td> 
+					  	<td>" . $row["tipo"] . "</td> 
 						<td><form method='post' action='conto.php'>
 					  	   <button  type='submit' title='Modifica Conto' name='editConto'
 					  	   class='btn btn-primary' value='" . $row["id_conto"] ."'>

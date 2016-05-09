@@ -15,9 +15,10 @@
 				</a></li>
 			<li><a href="archivio.php" id="archivio"> <i class="fa fa-sign-in "></i><?php echo $lang['LEFT_MENU_ARCHIVIO']; ?>
 				</a></li>
-			<li><a href="conto.php" id="conto"> <i class="fa fa-money "></i><?php echo $lang['LEFT_MENU_CONTI']; ?>
+			<li><a href="conto.php" id="conto"> <i class="fa fa-university "></i><?php echo $lang['LEFT_MENU_CONTI']; ?>
 				</a></li>
-			
+			<li><a href="fido.php" id="fido"> <i class="fa fa-money "></i><?php echo $lang['LEFT_MENU_FIDI']; ?>
+				</a></li>
 			<li><a href="#"><i class="fa fa-yelp "></i><?php echo $lang['LEFT_MENU_LINGUA']; ?> <span
 					class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
