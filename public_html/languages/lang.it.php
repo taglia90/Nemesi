@@ -63,6 +63,15 @@ $lang['FIDO_IMPORTO'] = 'Importo';
 $lang['FIDO_DIF'] = '% DIF';
 $lang['FIDO_SCAGLIONE'] = 'SCAGLIONE';
 
+//Set Condizioni
+$lang['SET_HEADLINE'] = 'SET CONDIZIONI';
+$lang['CRED_CONDIZIONI'] = 'Set di condizioni';
+$lang['CRED_DATA'] = 'Data decorrenza';
+$lang['CRED_TASSO'] = 'Tasso';
+$lang['CRED_PERCENT'] = 'Percentuale';
+$lang['CRED_VAL_SCAGLIONE'] = 'Valore scaglione';
+$lang['CRED_INSERIMENTO'] = 'Inserimento interessi creditori';
+
 // Button Generici
 
 $lang['BUTTON_INSERISCI'] = 'Inserisci';

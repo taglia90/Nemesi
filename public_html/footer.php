@@ -16,7 +16,9 @@
 <!-- CUSTOM SCRIPTS -->
 <script src="js/custom.js"></script>
 <!-- DATA TABLE SCRIPTS -->
-<script type="text/javascript" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript"
+	src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
 <!-- DATEPICKET SCRIPTS -->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>

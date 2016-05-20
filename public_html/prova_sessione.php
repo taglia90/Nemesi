@@ -18,7 +18,7 @@
         $PHPSESSID = $_POST['PHPSESSID'];
         
         header("Location: $redirect?PHPSESSID=$PHPSESSID"); // si ricarica la
-                                                            // pagina di login
+                                                                // pagina di login
     }
     
     session_start(); // si inizia o continua la sessione
@@ -56,15 +56,16 @@
         
         session_destroy(); // DISTRUGGE la sessione.
         
-        if (IsSet($_COOKIE['sav_user'])) // se presente si distrugge il cookie di
-                                        // login automatico
+        if (IsSet($_COOKIE['sav_user'])) // se presente si distrugge il cookie
+                                         // di
+                                         // login automatico
             
             setcookie("sav_user", $cok, time() - 31536000);
         
         header("Location: $redirect"); // si ricarica la pagina di login
         
         exit(); // si termina lo script in modo da ritornare alla schermata di
-              // login
+                    // login
     }
     
     // controllo user e passwd da cookie
@@ -111,7 +112,7 @@
     {
         
         if ($_GET['nocookie'] == 1) // i cookie sono off e si vuole ricordare il
-                                 // login
+                                    // login
             
             print
                     ("Spiacente, ma con i cookie disabilitati non posso fare i miracoli ;)<BR> 
@@ -134,7 +135,7 @@
     <INPUT TYPE=SUBMIT NAME=SUBMIT VALUE=\"Loggami\"><BR>");
         
         if (! IsSet($_COOKIE['PHPSESSID'])) // i cookie sono off, dobbiamo
-                                          // propagare noi il PHPSESSID
+                                            // propagare noi il PHPSESSID
             
             print("<INPUT TYPE=HIDDEN NAME=PHPSESSID VALUE=$PHPSESSID>");
         

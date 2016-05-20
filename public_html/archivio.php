@@ -9,7 +9,7 @@ $editPage = false;
 // INSERIMENTO O MODIFICA ARCHIVIO
 if (isset($_POST['inserisci'])) {
     // isEdit = true se è una pagina di modifica
-    $isEdit = $_POST['inserisci'];    
+    $isEdit = $_POST['inserisci'];
     
     $name = trim($_POST["nome_cliente"]);
     $nuovaBanca = trim($_POST["nuovaBanca"]);
@@ -44,19 +44,18 @@ if (isset($_POST['inserisci'])) {
         $sql2 = "";
         
         if ($banca != 0) { // Caso in cui la banca esiste
-                        
+            
             if ($isEdit) {
                 $sql = "UPDATE t_archivio SET 
                         nome_cliente = '" . $name . "',
                         banca = '" . $banca . "', 
                         descrizione = '" . $descrizione . "'
-                        WHERE id_archivio = ".$_POST["idArc"];
-                
+                        WHERE id_archivio = " . $_POST["idArc"];
             } else {
-            
+                
                 $sql = "INSERT INTO t_archivio (nome_cliente, banca, descrizione)
-    			VALUES ('" . $name . "','" .
-                         $banca . "','" . $descrizione . "')";
+    			VALUES ('" . $name . "','" . $banca . "','" .
+                         $descrizione . "')";
             }
             
             if ($conn->query($sql) === TRUE) {
@@ -89,17 +88,16 @@ if (isset($_POST['inserisci'])) {
                         banca = (SELECT id_banca FROM l_banca
     			                 WHERE nome = '" . $nuovaBanca . "'),
                         descrizione = '" . $descrizione . "'
-                        WHERE id_archivio = ".$_POST["idArc"];
+                        WHERE id_archivio = " . $_POST["idArc"];
             } else {
-            
+                
                 $sql2 = "INSERT INTO t_archivio (nome_cliente, banca, descrizione)
     			SELECT '" . $name . "',id_banca,'" .
                          $descrizione . "'
     			FROM l_banca
     			where nome = '" . $nuovaBanca . "'";
-                
             }
-
+            
             if ($conn->query($sql2) === TRUE) {
                 $queryResult = "Record inserito correttamente";
             } else {
@@ -150,7 +148,8 @@ function draw_table ()
 						<td>" . $row["id_archivio"] . "</td>
 					  	<td>" . $row["nome_cliente"] . "</td> 
 						<td>" . $row["nome"] . "</td>
-						<td>" . $row["descrizione"] . "</td>
+						<td>" . $row["descrizione"] .
+                 "</td>
 						<td><form method='post' action='conto.php'>
 							<button type='submit' title='Visualizza Conti' name='idArchivio' value='" .
                  $row["id_archivio"] . "'
@@ -159,14 +158,12 @@ function draw_table ()
 						  </button></form></td>
 						<td><form method='post' action='archivio.php'>
 							<button type='submit' title='Modifica Archivio' name='editArchivio'
-							class='btn btn-primary' value='" .
-                 $row["id_archivio"] ."'>
+							class='btn btn-primary' value='" . $row["id_archivio"] . "'>
 							<i class='fa fa-wrench'></i>
 						  </button></form></td>
 						<td><form method='post' action='archivio.php'>
 							<button type='submit' title='Elimina Archivio' name='deleteRow'
-							class='btn btn-primary' value='" .
-                 $row["id_archivio"] . "'><i class='fa fa-trash'></i>
+							class='btn btn-primary' value='" . $row["id_archivio"] . "'><i class='fa fa-trash'></i>
 						  </button></form></td>
 					  </tr>";
     }
@@ -308,17 +305,15 @@ require_once ("leftPanel.php");
 									id="descrizione">
 							</div>
 							<div>&nbsp;</div>
-							<button type="submit" id="insertEdit" name="inserisci"
-								value="0" class="btn btn-primary"><?php echo $lang['BUTTON_INSERISCI']; ?></button>
+							<button type="submit" id="insertEdit" name="inserisci" value="0"
+								class="btn btn-primary"><?php echo $lang['BUTTON_INSERISCI']; ?></button>
 							<p class="help-block" style="color: green;"><?php echo $queryResult;?></p>
 						</form>
 					</div>
 				</div>
 			</div>
-
-
-			<!--/.ROW-->
 		</div>
+		<!--/.ROW-->
 		<!--    Hover Rows  -->
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -349,12 +344,11 @@ $(document).ready(function(){
         $row = $result->fetch_assoc();
         echo "$('#nome_cliente').val('" . $row["nome_cliente"] . "');
 	              $('#banca').val(" . $row["banca"] . ");   
-	              $('#descrizione').val('" .
-                 $row["descrizione"] . "');
-	              $('#idArc').val('" . $row["id_archivio"] . "');
+	              $('#descrizione').val('" . $row["descrizione"] . "');
+	              $('#idArc').val('" .
+                 $row["id_archivio"] . "');
 	              $('#insertEdit').val(1);
-	              $('#insertEdit').html('" .
-                 $lang['BUTTON_MODIFICA'] . "');";
+	              $('#insertEdit').html('" . $lang['BUTTON_MODIFICA'] . "');";
     }
     ?>
 });

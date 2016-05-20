@@ -6,17 +6,13 @@ $listaFidi = $lang['FIDO_LISTA_FIDI'];
 $queryResult = "";
 
 // INSERIMENTO O MODIFICA FIDO
-if (isset($_POST['inserisci'])) {
-}
+if (isset($_POST['inserisci'])) {}
 // /
 
 // CREA LA TABLE DEL FIDO
 function draw_table ()
-{
-}
+{}
 // /
-
-
 
 require_once ("leftPanel.php");
 ?>
@@ -45,23 +41,28 @@ require_once ("leftPanel.php");
 
 							<div class="form-group">
 								<label><?php echo $lang['FIDO_DATA']; ?></label> <input
-									class="form-control" type="text" id="dataAffidamento" name="dataAffidamento">
-									<!-- <p class="help-block" style="color:red;"><?php echo $dataApErr;?></p>  -->
+									class="form-control" type="text" id="dataAffidamento"
+									name="dataAffidamento">
+								<!-- <p class="help-block" style="color:red;"><?php echo $dataApErr;?></p>  -->
 							</div>
-							<div style="width: 55%; margin-left:122px; margin-right: 0px; float: left;">
-								<label><?php echo $lang['FIDO_IMPORTO']; ?></label> 
+							<div
+								style="width: 55%; margin-left: 122px; margin-right: 0px; float: left;">
+								<label><?php echo $lang['FIDO_IMPORTO']; ?></label>
 							</div>
 							<div style="width: 30%; margin-right: 0px; float: right;">
 
-								<label><?php echo $lang['FIDO_DIF']; ?></label> 
+								<label><?php echo $lang['FIDO_DIF']; ?></label>
 							</div>
-    							<label style="float: left; width:120px"><?php echo $lang['FIDO_SCAGLIONE']." "."1"; ?></label> 
-    							<input style="width: 55%; margin-right: 0px; float: left;" class="form-control" type="number" id="importo1" name="importo1">
-    							<input style="width: 30%; margin-right: 0px; float: right;" class="form-control" type="number" id="dif1" name="dif1">
-							<br /><br /><br />
+							<label style="float: left; width: 120px"><?php echo $lang['FIDO_SCAGLIONE']." "."1"; ?></label>
+							<input style="width: 55%; margin-right: 0px; float: left;"
+								class="form-control" type="number" id="importo1" name="importo1">
+							<input style="width: 30%; margin-right: 0px; float: right;"
+								class="form-control" type="number" id="dif1" name="dif1"> <br />
+							<br />
+							<br />
 							<div>&nbsp;</div>
-							<button type="submit" id="insertEdit" name="inserisci" 
-								value="0" class="btn btn-primary"><?php echo $lang['BUTTON_INSERISCI']; ?></button>
+							<button type="submit" id="insertEdit" name="inserisci" value="0"
+								class="btn btn-primary"><?php echo $lang['BUTTON_INSERISCI']; ?></button>
 							<p class="help-block" style="color: green;"><?php echo $queryResult;?></p>
 						</form>
 					</div>
@@ -99,28 +100,33 @@ $(document).ready(function(){
 	$('#dataAffidamento').datepicker();
 
 	<?php
-    // INIZIALIZZO I CAMPI SE SONO IN EDIT
-/*    if ($editPage) {
-         $row = $result->fetch_assoc();
-//         echo "alert('". date("d/m/Y", strtotime($row["data_apertura"])). " UUUU');";
-         echo "$('#arch').val(". $row["id_archivio"] .");
-               $('#numero').val(" . $row["nr_conto"] . ");   
-               $('#tipoConto').val('" . $row["id_tipo_conto"] . "');
-               $('#intestazione').val('" . $row["intestazione"] . "');
-               $('#indirizzo').val('" . $row["indirizzo"] . "');
-               $('#cap').val('" . $row["cap"] . "');
-               $('#localita').val('" . $row["localita"] . "');
-               $('#provincia').val('" . $row["provincia"] . "');
-               $('#dataApertura').val('" . date("d/m/Y", strtotime($row["data_apertura"])). "');
-               $('#dataChiusura').val('" . date("d/m/Y", strtotime($row["data_chiusura"])). "');
-               $('#iban').val('" . $row["iban"] . "');
-               $('#valuta').val('" . $row["valuta"] . "');
-               $('#idConto').val('" . $row["id_conto"] . "');
-               $('#insertEdit').val(1);
-               $('#insertEdit').html('" .
-               $lang['BUTTON_MODIFICA'] . "');";
-    }*/
-    ?>
+// INIZIALIZZO I CAMPI SE SONO IN EDIT
+/*
+ * if ($editPage) {
+ * $row = $result->fetch_assoc();
+ * // echo "alert('". date("d/m/Y", strtotime($row["data_apertura"])). "
+ * UUUU');";
+ * echo "$('#arch').val(". $row["id_archivio"] .");
+ * $('#numero').val(" . $row["nr_conto"] . ");
+ * $('#tipoConto').val('" . $row["id_tipo_conto"] . "');
+ * $('#intestazione').val('" . $row["intestazione"] . "');
+ * $('#indirizzo').val('" . $row["indirizzo"] . "');
+ * $('#cap').val('" . $row["cap"] . "');
+ * $('#localita').val('" . $row["localita"] . "');
+ * $('#provincia').val('" . $row["provincia"] . "');
+ * $('#dataApertura').val('" . date("d/m/Y", strtotime($row["data_apertura"])).
+ * "');
+ * $('#dataChiusura').val('" . date("d/m/Y", strtotime($row["data_chiusura"])).
+ * "');
+ * $('#iban').val('" . $row["iban"] . "');
+ * $('#valuta').val('" . $row["valuta"] . "');
+ * $('#idConto').val('" . $row["id_conto"] . "');
+ * $('#insertEdit').val(1);
+ * $('#insertEdit').html('" .
+ * $lang['BUTTON_MODIFICA'] . "');";
+ * }
+ */
+?>
 });
 
 </script>

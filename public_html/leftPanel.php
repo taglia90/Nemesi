@@ -28,8 +28,7 @@
 					</li>
 					<li><a href="index.php?lang=ru"><i class="fa fa-key "></i>Pусский</a>
 					</li>
-				</ul>
-			</li>
+				</ul></li>
 		</ul>
 	</div>
 </nav>

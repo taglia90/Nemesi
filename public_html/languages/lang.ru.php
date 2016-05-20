@@ -63,6 +63,10 @@ $lang['FIDO_IMPORTO'] = 'Importo';
 $lang['FIDO_DIF'] = '% DIF';
 $lang['FIDO_SCAGLIONE'] = 'SCAGLIONE';
 
+//Set Condizioni
+$lang['SET_HEADLINE'] = 'SET CONDIZIONI';
+$lang['SET_CONDIZIONI'] = 'Set di condizioni';
+
 // Button Generici
 
 $lang['BUTTON_INSERISCI'] = 'Inserisci';
