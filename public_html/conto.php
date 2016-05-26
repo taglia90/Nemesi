@@ -55,13 +55,12 @@ if (isset($_POST['inserisci'])) {
     }
     
     if (! empty($dataChiusura)) {
-        if (validate_date($dataApertura)) {
-            $dataApertura = "STR_TO_DATE('" . $dataApertura . "', '%d/%m/%Y')";
+        if (validate_date($dataChiusura)) {
+            $dataChiusura = "STR_TO_DATE('" . $dataChiusura . "', '%d/%m/%Y')";
         } else {
-            $dataApErr = "Formato sbagliato. Inserire le date come gg/mm/aaaa";
+            $dataChErr = "Formato sbagliato. Inserire le date come gg/mm/aaaa";
             $inserisci = false;
         }
-        $dataChiusura = "STR_TO_DATE('" . $dataChiusura . "', '%d/%m/%Y')";
     } else {
         $dataChiusura = "null";
     }

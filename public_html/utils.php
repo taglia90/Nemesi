@@ -16,7 +16,7 @@ function connetti ()
 
 function validator ($regex, $field)
 {
-    echo $regex . " " . $field;
+    //echo $regex . " " . $field;
     if (preg_match($regex, $field)) {
         return true;
     } else {
