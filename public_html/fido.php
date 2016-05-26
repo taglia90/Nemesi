@@ -45,24 +45,14 @@ require_once ("leftPanel.php");
 									name="dataAffidamento">
 								<!-- <p class="help-block" style="color:red;"><?php echo $dataApErr;?></p>  -->
 							</div>
-							<div
-								style="width: 55%; margin-left: 122px; margin-right: 0px; float: left;">
-								<label><?php echo $lang['FIDO_IMPORTO']; ?></label>
+							<div id="scaglioneContainer" style="overflow: hidden; margin-bottom: 15px;">
 							</div>
-							<div style="width: 30%; margin-right: 0px; float: right;">
-
-								<label><?php echo $lang['FIDO_DIF']; ?></label>
-							</div>
-							<label style="float: left; width: 120px"><?php echo $lang['FIDO_SCAGLIONE']." "."1"; ?></label>
-							<input style="width: 55%; margin-right: 0px; float: left;"
-								class="form-control" type="number" id="importo1" name="importo1">
-							<input style="width: 30%; margin-right: 0px; float: right;"
-								class="form-control" type="number" id="dif1" name="dif1"> <br />
-							<br />
-							<br />
-							<div>&nbsp;</div>
 							<button type="submit" id="insertEdit" name="inserisci" value="0"
 								class="btn btn-primary"><?php echo $lang['BUTTON_INSERISCI']; ?></button>
+							<button id="aggiungiSca" name="aggiungiSca"
+								class="btn btn-primary" value=0 onClick="javascript:return aggiungiScaglione();"><?php echo $lang['BUTTON_AGGIUNGI_SCAGLIONE']; ?></button>
+							<button id="rimuoviSca" name="rimuoviSca"
+								class="btn btn-primary" onClick="javascript:return rimuoviScaglione();"><?php echo $lang['BUTTON_RIMUOVI_SCAGLIONE']; ?></button>
 							<p class="help-block" style="color: green;"><?php echo $queryResult;?></p>
 						</form>
 					</div>
@@ -95,39 +85,46 @@ setActiveMenu("fido");
 
 $(document).ready(function(){
 	
-    //$('#contoTable').DataTable();
     $.datepicker.setDefaults({dateFormat: 'dd/mm/yy'});
 	$('#dataAffidamento').datepicker();
-
-	<?php
-// INIZIALIZZO I CAMPI SE SONO IN EDIT
-/*
- * if ($editPage) {
- * $row = $result->fetch_assoc();
- * // echo "alert('". date("d/m/Y", strtotime($row["data_apertura"])). "
- * UUUU');";
- * echo "$('#arch').val(". $row["id_archivio"] .");
- * $('#numero').val(" . $row["nr_conto"] . ");
- * $('#tipoConto').val('" . $row["id_tipo_conto"] . "');
- * $('#intestazione').val('" . $row["intestazione"] . "');
- * $('#indirizzo').val('" . $row["indirizzo"] . "');
- * $('#cap').val('" . $row["cap"] . "');
- * $('#localita').val('" . $row["localita"] . "');
- * $('#provincia').val('" . $row["provincia"] . "');
- * $('#dataApertura').val('" . date("d/m/Y", strtotime($row["data_apertura"])).
- * "');
- * $('#dataChiusura').val('" . date("d/m/Y", strtotime($row["data_chiusura"])).
- * "');
- * $('#iban').val('" . $row["iban"] . "');
- * $('#valuta').val('" . $row["valuta"] . "');
- * $('#idConto').val('" . $row["id_conto"] . "');
- * $('#insertEdit').val(1);
- * $('#insertEdit').html('" .
- * $lang['BUTTON_MODIFICA'] . "');";
- * }
- */
-?>
+	$('#rimuoviSca').css("display","none");
 });
+
+function aggiungiScaglione(){
+	var num = parseInt($('#aggiungiSca').val()) + 1;
+	var elementToAppend = '<div id="scaglioneElement'+num+'"> '
+	+'<div style="width: 55%; margin-left: 122px; margin-right: 0px; float: left;"> '
+	+'	<label><?php echo $lang['FIDO_IMPORTO']; ?></label> '
+	+' </div> '
+	+' <div style="width: 30%; margin-right: 0px; float: right;"> '
+	+' 	<label><?php echo $lang['FIDO_DIF']; ?></label> '
+	+' </div> '
+	+' <label style="float: left; width: 120px"><?php echo $lang['FIDO_SCAGLIONE'];?>' + num+'</label> '
+	+' <input style="width: 55%; margin-right: 0px; float: left;" '
+	+' 	class="form-control" type="number" id="importo'+num+'" name="importo'+num+'"> '
+	+' <input style="width: 30%; margin-right: 0px; float: right;" '
+	+' 	class="form-control" type="number" id="dif'+num+'" name="dif'+num+'"> '
+	+'</div>';
+
+	$("#scaglioneContainer").append(elementToAppend);
+	$('#aggiungiSca').val(num);
+
+	$('#rimuoviSca').css("display",true);
+	return false;
+}
+
+function rimuoviScaglione(){
+	var num = parseInt($('#aggiungiSca').val());
+	if(num > 0){
+		$("#scaglioneElement" + num).remove();
+		$('#aggiungiSca').val(--num);
+	} 
+
+	if (num == 0) {
+		$('#rimuoviSca').css("display","none");
+	}
+	return false;
+}
 
 </script>
 </body>

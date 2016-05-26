@@ -76,6 +76,8 @@ $lang['CRED_INSERIMENTO'] = 'Inserimento interessi creditori';
 
 $lang['BUTTON_INSERISCI'] = 'Insert';
 $lang['BUTTON_MODIFICA'] = 'Edit';
+$lang['BUTTON_AGGIUNGI_SCAGLIONE'] = 'Aggiungi Scaglione';
+$lang['BUTTON_RIMUOVI_SCAGLIONE'] = 'Rimuovi Scaglione';
 
 ?>
 
