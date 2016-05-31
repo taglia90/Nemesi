@@ -71,6 +71,9 @@ require_once ("leftPanel.php");
 													name="dataDecorrenza">
 												<!-- <p class="help-block" style="color:red;"><?php echo $dataApErr;?></p>  -->
 											</div>
+
+
+											<!-- Tasso 1 -->
 											<div
 												style="width: 55%; margin-left: 122px; margin-right: 0px; float: left;">
 												<label><?php echo $lang['CRED_PERCENT']; ?></label>
@@ -80,12 +83,55 @@ require_once ("leftPanel.php");
 												<label><?php echo $lang['CRED_VAL_SCAGLIONE']; ?></label>
 											</div>
 											<label style="float: left; width: 120px"><?php echo $lang['CRED_TASSO']." "."1"; ?></label>
+
 											<input style="width: 55%; margin-right: 0px; float: left;"
-												class="form-control" type="number" id="tasso1"
-												name="importo1"> <input
-												style="width: 30%; margin-right: 0px; float: right;"
+												class="form-control" type="number" id="perc1" name="perc1">
+											<input style="width: 30%; margin-right: 0px; float: right;"
 												class="form-control" type="number" id="valScaglione1"
 												name="valScaglione1"> <br /> <br /> <br />
+
+											<!-- Tasso 2 -->
+											<div
+												style="width: 55%; margin-left: 122px; margin-right: 0px; float: left;">
+											</div>
+											<div style="width: 30%; margin-right: 0px; float: right;"></div>
+											<label style="float: left; width: 120px"><?php echo $lang['CRED_TASSO']." "."2"; ?></label>
+
+											<input style="width: 55%; margin-right: 0px; float: left;"
+												class="form-control" type="number" id="perc2" name="perc2">
+											<input style="width: 30%; margin-right: 0px; float: right;"
+												class="form-control" type="number" id="valScaglione2"
+												name="valScaglione2"> <br /> <br />
+
+											<!-- Tasso 3 -->
+											<div
+												style="width: 55%; margin-left: 122px; margin-right: 0px; float: left;">
+											</div>
+											<div style="width: 30%; margin-right: 0px; float: right;"></div>
+											<label style="float: left; width: 120px"><?php echo $lang['CRED_TASSO']." "."3"; ?></label>
+
+											<input style="width: 55%; margin-right: 0px; float: left;"
+												class="form-control" type="number" id="perc3" name="perc3">
+											<input style="width: 30%; margin-right: 0px; float: right;"
+												class="form-control" type="number" id="valScaglione3"
+												name="valScaglione3"> <br /> <br />
+
+											<!-- Tasso oltre -->
+											<div
+												style="width: 55%; margin-left: 122px; margin-right: 0px; float: left;">
+											</div>
+											<div style="width: 30%; margin-right: 0px; float: right;"></div>
+											<label style="float: left; width: 120px"><?php echo $lang['CRED_TASSO']." "."oltre"; ?></label>
+
+											<input
+												style="width: 55%; margin-right: 0px; float: left; display: none"
+												class="form-control" type="number" id="percOltre"
+												name="percOltre"> <input
+												style="width: 30%; margin-right: 0px; float: right;"
+												class="form-control" type="number" id="valScaglioneOltre"
+												name="valScaglioneOltre"> <br /> <br /> <br />
+
+											<!--  fine tassi -->
 											<div>&nbsp;</div>
 											<button type="submit" id="insertEdit" name="inserisci"
 												value="0" class="btn btn-primary"><?php echo $lang['BUTTON_INSERISCI']; ?></button>
