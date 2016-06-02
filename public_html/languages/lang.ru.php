@@ -62,6 +62,7 @@ $lang['FIDO_LISTA_FIDI'] = 'Lista Fidi';
 $lang['FIDO_IMPORTO'] = 'Importo';
 $lang['FIDO_DIF'] = '% DIF';
 $lang['FIDO_SCAGLIONE'] = 'SCAGLIONE';
+$lang['FIDO_CONTO'] = 'Conto di Riferimento';
 
 //Set Condizioni
 $lang['SET_HEADLINE'] = 'SET CONDIZIONI';
